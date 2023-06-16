@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.bedu.SetTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-06-16T03:12:35" hostname="JORGE-GAMER" time="0.066">
+  <properties/>
+  <testcase name="It throws an exception when a element already exists" classname="org.bedu.SetTest" time="0.046"/>
+  <testcase name="It clears the set" classname="org.bedu.SetTest" time="0.004"/>
+  <testcase name="An element exists if the set is empty" classname="org.bedu.SetTest" time="0.004"/>
+  <testcase name="An element exists if the set has elements" classname="org.bedu.SetTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
