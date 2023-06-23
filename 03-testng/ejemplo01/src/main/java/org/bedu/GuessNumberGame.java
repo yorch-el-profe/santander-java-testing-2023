@@ -1,18 +1,18 @@
 package org.bedu;
 
-import java.util.Random;
-
 public class GuessNumberGame {
 
+  private IRandomNumberGenerator generator;
   private int secretNumber;
   private int tries;
 
-  private final int MIN_RANGE = 0;
-  private final int MAX_RANGE = 10;
+  public GuessNumberGame(IRandomNumberGenerator generator) {
+    this.generator = generator;
+  }
 
   public void startGame() {
     tries = 0;
-    generateNumber();
+    secretNumber = generator.generateRandomNumber();
   }
 
   public int getTries() {
@@ -20,7 +20,7 @@ public class GuessNumberGame {
   }
 
   public boolean guessNumber(int number) throws GameOverException, OutOfRangeException {
-    if (number > MAX_RANGE || number < MIN_RANGE) {
+    if (number > generator.getMaxRange() || number < generator.getMinRange()) {
       throw new OutOfRangeException();
     }
 
@@ -35,10 +35,5 @@ public class GuessNumberGame {
     }
 
     return false;
-  }
-
-  private void generateNumber() {
-    Random random = new Random();
-    secretNumber = random.nextInt(MAX_RANGE - MIN_RANGE + 1) + MIN_RANGE;
   }
 }

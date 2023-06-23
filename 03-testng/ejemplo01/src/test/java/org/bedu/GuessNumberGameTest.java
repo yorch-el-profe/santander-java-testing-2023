@@ -15,7 +15,8 @@ public class GuessNumberGameTest {
   // TestNG: @BeforeClass
   @BeforeClass
   public void initialSetup() {
-    game = new GuessNumberGame();
+    IRandomNumberGenerator generator = new FakeRandomNumberGenerator();
+    game = new GuessNumberGame(generator);
   }
 
   // Queremos iniciar un nuevo juego
@@ -47,16 +48,15 @@ public class GuessNumberGameTest {
 
   @Test(description = "The game must return true when the number is correct")
   public void correctNumber() {
-    boolean result = game.guessNumber(8);
+    boolean result = game.guessNumber(5);
     Assert.assertTrue(result);
   }
 
-  /*
-   * @Test(description = "The game must finish at 3rd try")
-   * public void gameOver() {
-   * game.guessNumber();
-   * game.guessNumber();
-   * game.guessNumber();
-   * }
-   */
+  @Test(description = "The game must finish at 3rd try")
+  public void gameOver() {
+    game.guessNumber(1);
+    game.guessNumber(2);
+    Assert.assertThrows(GameOverException.class, () -> game.guessNumber(10));
+  }
+
 }
