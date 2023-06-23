@@ -19,7 +19,11 @@ public class GuessNumberGame {
     return tries;
   }
 
-  public boolean guessNumber(int number) throws GameOverException {
+  public boolean guessNumber(int number) throws GameOverException, OutOfRangeException {
+    if (number > MAX_RANGE || number < MIN_RANGE) {
+      throw new OutOfRangeException();
+    }
+
     if (number == secretNumber) {
       return true;
     }
