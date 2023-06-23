@@ -1,0 +1,24 @@
+plugins {
+    id 'application'
+}
+
+group 'org.bedu'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.17
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useTestNG() {        
+      useDefaultListeners = true
+    }
+}
+
+dependencies {
+  testImplementation 'org.testng:testng:7.7.0'
+  implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+  implementation 'org.seleniumhq.selenium:selenium-support:3.141.59'
+}
