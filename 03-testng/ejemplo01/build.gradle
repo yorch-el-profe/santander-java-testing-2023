@@ -1,0 +1,31 @@
+plugins {
+    id 'application'
+}
+
+application {
+  mainClass = "org.bedu.App"
+}
+
+group 'org.bedu'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.17
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useTestNG() {
+        // To generate reports by TestNG library
+        useDefaultListeners = true
+    }
+}
+
+dependencies {
+  testImplementation 'org.testng:testng:7.7.0'
+}
+
+run {
+  standardInput = System.in;
+}
