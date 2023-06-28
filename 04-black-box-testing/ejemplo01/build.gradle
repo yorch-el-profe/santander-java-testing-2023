@@ -1,0 +1,36 @@
+plugins {
+    id 'application'
+    id "se.thinkcode.cucumber-runner" version "0.0.11"
+}
+
+group = 'org.bedu'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+cucumber {
+  glue = "classpath:org.bedu.stepdefinitions"
+  main = "io.cucumber.core.cli.Main"
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+	  annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    implementation 'io.cucumber:cucumber-java:7.12.1'
+    implementation 'io.cucumber:cucumber-junit:7.12.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
