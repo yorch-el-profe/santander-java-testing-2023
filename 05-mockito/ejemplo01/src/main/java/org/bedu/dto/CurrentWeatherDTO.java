@@ -1,8 +1,10 @@
 package org.bedu.dto;
 
 import lombok.Data;
+import lombok.Builder;
 
 @Data
+@Builder
 public class CurrentWeatherDTO {
   private double temperature;
   private double windspeed;

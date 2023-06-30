@@ -1,8 +1,10 @@
 package org.bedu.dto;
 
 import lombok.Data;
+import lombok.Builder;
 
 @Data
+@Builder
 public class WeatherDTO {
   private double latitude;
   private double longitude;

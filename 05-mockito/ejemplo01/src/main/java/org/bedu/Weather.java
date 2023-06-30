@@ -8,8 +8,8 @@ public class Weather {
 
   private Axios axios;
 
-  public Weather() {
-    axios = new Axios();
+  public Weather(Axios axios) {
+    this.axios = axios;
   }
 
   public double currentWeather(double latitude, double longitude) {
