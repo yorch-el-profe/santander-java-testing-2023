@@ -20,6 +20,16 @@ public class Weather {
   }
 
   public ThermalSensation currentThermalSensation(double latitude, double longitude) {
-    return ThermalSensation.COLD;
+    double temperature = currentWeather(latitude, longitude);
+
+    if (temperature >= 24) {
+      return ThermalSensation.HOT;
+    }
+
+    if (temperature <= 10) {
+      return ThermalSensation.COLD;
+    }
+
+    return ThermalSensation.WARM;
   }
 }
