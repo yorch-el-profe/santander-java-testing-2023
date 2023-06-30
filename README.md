@@ -15,3 +15,17 @@ Se dio una introducción a la importancia de las pruebas, cuál es la diferencia
 Se vio otro ejemplo de cómo crear pruebas unitarias utilizando `JUnit + Jupiter`, así como el ejecutar las pruebas utilizando el proceso de `Integración Continua` con `Github Actions`.
 
 * [Ejemplo 01](02-unit-testing/ejemplo01/): Implementación de una mini base de datos con pruebas unitarias.
+
+3. [TestNG](03-testng)
+
+Se dio una introducción al framework de pruebas `TestNG` el cual proclama ser una versión moderna y mejorada del ya conocido `JUnit`.
+
+* [Ejemplo 01](03-testng/ejemplo01/): Implementación de un juego para adivinar un número aleatorio usando `TestNG` para realizar pruebas unitarias.
+
+* [Ejemplo 02](03-testng/ejemplo02/): Implementación de pruebas de integración de la página de Wikipedia usando `TestNG` y `Selenium`.
+
+4. [Black Box Testing](04-black-box-testing/)
+
+Durante las primeras 3 sesiones se implementaron `White Box Testing` el cual consiste en basar las pruebas en la implementación del código. En esta sesión vimos cómo realizar `Black Box Testing` utilizando `Behaviour Driven Development` con `Cucumber`.
+
+* [Ejemplo 01](04-black-box-testing/ejemplo01/): Implementación de un cajero automático y realización de pruebas unitarias con `JUnit` y pruebas de caja negra con `Cucumber`.
