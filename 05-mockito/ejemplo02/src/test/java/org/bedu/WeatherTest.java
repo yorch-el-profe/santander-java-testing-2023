@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.any;
-
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.bedu.dto.CurrentWeatherDTO;
@@ -12,19 +14,21 @@ import org.bedu.dto.IPDTO;
 import org.bedu.dto.WeatherDTO;
 import org.bedu.util.Axios;
 import org.bedu.util.ThermalSensation;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class WeatherTest {
 
-  private static Weather weather;
-  private static Axios axios;
+  private Weather weather;
+  private Axios axios;
 
-  @BeforeAll
-  public static void setup() {
-    axios = Mockito.mock(Axios.class);
+  @BeforeEach
+  public void setup() {
+    // Spy: Una simulación de un objeto
+    // pero que permite monitorea sus llamadas a los métodos.
+    axios = Mockito.spy(new Axios());
     weather = new Weather(axios);
   }
 
@@ -33,7 +37,8 @@ public class WeatherTest {
   public void apiTemperature() {
     double expectedTemperature = 23.2;
 
-    when(axios.request(anyString(), any())).thenReturn(createMock(expectedTemperature));
+    // En el caso de los spy, se utiliza "doReturn" en vez de "when"
+    doReturn(createMock(expectedTemperature)).when(axios).request(anyString(), any());
 
     double temperature = weather.currentWeather(20.659698, -103.349609);
 
@@ -43,7 +48,7 @@ public class WeatherTest {
   @Test
   @DisplayName("It's hot")
   public void hot() {
-    when(axios.request(anyString(), any())).thenReturn(createMock(28));
+    doReturn(createMock(28)).when(axios).request(anyString(), any());
 
     ThermalSensation sensation = weather.currentThermalSensation(20.659698, -103.349609);
 
@@ -53,7 +58,7 @@ public class WeatherTest {
   @Test
   @DisplayName("It's cold")
   public void cold() {
-    when(axios.request(anyString(), any())).thenReturn(createMock(5));
+    doReturn(createMock(5)).when(axios).request(anyString(), any());
 
     ThermalSensation sensation = weather.currentThermalSensation(20.659698, -103.349609);
 
@@ -63,7 +68,7 @@ public class WeatherTest {
   @Test
   @DisplayName("It's warm")
   public void warm() {
-    when(axios.request(anyString(), any())).thenReturn(createMock(15));
+    doReturn(createMock(15)).when(axios).request(anyString(), any());
 
     ThermalSensation sensation = weather.currentThermalSensation(20.659698, -103.349609);
 
@@ -78,18 +83,24 @@ public class WeatherTest {
     double expectedTemperature = 18.5;
 
     // Mock cuando se llame el API de la IP
-    when(axios.request(eq("http://ip-api.com/json"), eq(IPDTO.class)))
-        .thenReturn(IPDTO.builder().lat(latitude).lon(longitude).build());
+    doReturn(IPDTO.builder().lat(latitude).lon(longitude).build())
+        .when(axios)
+        .request(eq("http://ip-api.com/json"), eq(IPDTO.class));
 
     // Mock cuando se llame el API del clima
     String url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude
         + "&current_weather=true";
-    when(axios.request(eq(url), eq(WeatherDTO.class)))
-        .thenReturn(createMock(expectedTemperature));
+    doReturn(createMock(expectedTemperature))
+        .when(axios)
+        .request(eq(url), eq(WeatherDTO.class));
 
     double currentWeather = weather.localWeather();
 
     assertEquals(currentWeather, expectedTemperature);
+
+    // Valida que el método "axios.request"
+    // se ha invocado 2 veces
+    verify(axios, times(2)).request(anyString(), any());
   }
 
   private WeatherDTO createMock(double expectedTemperature) {
