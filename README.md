@@ -37,3 +37,11 @@ Se dio una introducción a `Mockito`, cuál es la diferencia entre `Mock` y `Spy
 * [Ejemplo 01](05-mockito/ejemplo01/): Implementación de una aplicación que consulta la temperatura actual basado en una latitud y longitud. Las pruebas utilizan `Mock` con `when`.
 
 * [Ejemplo 02](05-mockito/ejemplo02/): Extensión del ejemplo 01 pero ahora consumiendo un API adicional que obtiene la latitud y longitud de acuerdo a la IP actual. Las pruebas utilizan `Spy` con `doReturn`.
+
+6. [Test Driven Development](06-test-driven-development/)
+
+Se explicó de qué trata el `Test Driven Development` y cómo aplicarlo para ayudar en el desarrollo de soluciones.
+
+* [Ejemplo 01](06-test-driven-development/ejemplo01/): Implementación del algoritmo de búsqueda binaria aplicando `TDD`.
+
+* [Ejemplo 02](06-test-driven-development/ejemplo02/): Implementación de un algoritmo para verificar el balanceo de paréntesis aplicando `TDD`.
