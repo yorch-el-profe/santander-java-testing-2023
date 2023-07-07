@@ -1,0 +1,42 @@
+plugins {
+    id 'application'
+    id 'jacoco'
+}
+
+group 'org.bedu'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.17
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Nueva tarea que ejecuta "jacoco" para validar la cobertura de código de las pruebas.
+task coverage {
+  dependsOn test // Al ejecutar el comando "gradle coverage" ejecute primero "gradle test"
+  dependsOn jacocoTestReport // Generar el reporte al ejecutar el comando "gradle coverage"
+  finalizedBy jacocoTestCoverageVerification // Verifica que se cumpla la cobertura configurada
+}
+
+// Configurar el límite de la cobertura mínima necesaria
+// para garantizar la calidad de las pruebas.
+jacocoTestCoverageVerification {
+  violationRules {
+    rule {
+      limit {
+        minimum = 0.95 // 95%
+      }
+    }
+  }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
