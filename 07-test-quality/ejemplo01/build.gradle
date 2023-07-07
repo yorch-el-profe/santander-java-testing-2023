@@ -1,6 +1,8 @@
 plugins {
     id 'application'
-    id 'jacoco'
+    id 'jacoco' // Utilizamos el plugin de Gradle para JaCoCo
+    id 'pmd' // Utilizamos el plugin de Gradle para PMD
+    // Agrega dos comandos "pmdMain" y "pmdTest"
 }
 
 group 'org.bedu'
@@ -33,6 +35,13 @@ jacocoTestCoverageVerification {
       }
     }
   }
+}
+
+// Configurar PMD para utilizar las reglas de:
+// 1. Best Practices (category/java/bestpractices.xml)
+// 2. Code Style
+pmd {
+    ruleSetFiles = files("${projectDir}/src/test/resources/pmd-rules.xml")
 }
 
 dependencies {
