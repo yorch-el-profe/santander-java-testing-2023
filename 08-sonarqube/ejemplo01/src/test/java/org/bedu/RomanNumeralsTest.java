@@ -24,19 +24,19 @@ public class RomanNumeralsTest {
 
   @ParameterizedTest
   @ValueSource(strings = { "A", "IVZ", "ABC", "XLVZ" })
-  public void validRomanNumeral(String input) {
+  void validRomanNumeral(String input) {
     assertThrows(InvalidRomanNumeralException.class, () -> algorithm.toDecimal(input));
   }
 
   @ParameterizedTest
   @MethodSource("singleNumerals")
-  public void singleNumeral(String roman, int decimal) {
+  void singleNumeral(String roman, int decimal) {
     assertEquals(algorithm.toDecimal(roman), decimal);
   }
 
   @ParameterizedTest
   @MethodSource("romanNumerals")
-  public void romanNumeralsTest(String roman, int decimal) {
+  void romanNumeralsTest(String roman, int decimal) {
     assertEquals(algorithm.toDecimal(roman), decimal);
   }
 

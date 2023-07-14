@@ -1,0 +1,42 @@
+plugins {
+    id 'application'
+    id 'jacoco'
+    // Plugin de sonarqube
+    id "org.sonarqube" version "4.2.1.3168"
+}
+
+group 'org.bedu'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.17
+
+repositories {
+    mavenCentral()
+}
+
+// Configurar Jacoco para obtener el reporte en formato XML
+jacocoTestReport {
+  reports {
+    xml.required = true // Genere el resultado del reporte en XML
+  }
+}
+
+// Configurar Sonarqube para indicar dónde se encuentra
+// el reporte en XML de Jacoco
+sonar {
+  properties {
+    property "sonar.jacoco.reportPaths", "build/reports/jacoco/test"
+  }
+}
+
+test {
+    useJUnitPlatform()
+    // Una vez finalizada la ejecución de las pruebas
+    finalizedBy jacocoTestReport
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
