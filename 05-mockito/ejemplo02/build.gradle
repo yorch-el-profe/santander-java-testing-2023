@@ -21,6 +21,10 @@ repositories {
 }
 
 test {
+    // Ejecutando las pruebas en paralelo
+    // con la cantidad máxima de procesadores disponibles
+    logger.info "Procesadores: " + Runtime.runtime.availableProcessors()
+    maxParallelForks = Runtime.runtime.availableProcessors()
     useJUnitPlatform()
 }
 dependencies {
